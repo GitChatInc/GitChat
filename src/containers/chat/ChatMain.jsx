@@ -4,7 +4,7 @@ import ChatInput from './ChatInput.jsx'
 
 export default () => {
   return (
-    <div class='border w-2/3'>
+    <div class='border w-2/3  rounded-lg p-1'>
       <ChatMessageLog/>
       <ChatInput/>
     </div>

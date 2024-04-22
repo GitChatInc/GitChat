@@ -12,5 +12,5 @@ export default () => {
     messages.push(<Message key={i} from={e.from} content={e.content} />);
   });
 
-  return <div class='border h-4/5'>{messages}</div>;
+  return <div class='border h-2/3  rounded-lg p-1'>{messages}</div>;
 };

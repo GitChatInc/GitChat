@@ -12,5 +12,5 @@ export default () => {
     repos.push(<Repo key={i} name={e.name} />);
   });
 
-  return <div class='border w-1/3'> {repos}</div>;
+  return <div class='border w-1/3  rounded-lg p-1'> {repos}</div>;
 };
