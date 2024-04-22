@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default (props) => {
+export default () => {
   return (
     <div class='border'>
-      {props.name}
+      ChatMessageLog
     </div>
   );
 };

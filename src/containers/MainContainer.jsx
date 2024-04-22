@@ -1,12 +1,10 @@
 import React from 'react';
-import ChatSideBar from './ChatSideBar.jsx';
-import ChatContainer from './ChatContainer.jsx';
+import ChatContainer from './chat/ChatContainer.jsx';
 
 export default () => {
   return (
-    <main class='border'>
-      <ChatSideBar />
+    <div class='flex justify-center items-center min-h-screen bg-slate-700'>
       <ChatContainer />
-    </main>
+    </div>
   );
 };
