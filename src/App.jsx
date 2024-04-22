@@ -1,13 +1,8 @@
 import React from 'react';
+import ChatBox from './components/ChatBox.jsx';
 
 const App = () => {
-  return (
-    <main>
-      <header>
-        <h1>Welcome to gitChat</h1>
-      </header>
-    </main>
-  );
+  return <ChatBox />;
 };
 
 export default App;
