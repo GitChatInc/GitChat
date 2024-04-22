@@ -1,8 +1,8 @@
 import React from 'react';
-import ChatContainer from './components/ChatContainer.jsx';
+import MainContainer from './containers/MainContainer.jsx';
 
 const App = () => {
-  return <ChatContainer />;
+  return <MainContainer />;
 };
 
 export default App;
