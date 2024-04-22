@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 export default (props) => {
   return (
-    <div class='border rounded-lg p-1 my-1'>
+    <div class="my-1 rounded-lg border p-1">
       {props.from} {props.content}
     </div>
   );
