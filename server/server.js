@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const OauthRouter = require('./routers/oauthRouter.js');
 const ReposRouter = require('./routers/reposRouter.js');
+require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
@@ -17,7 +18,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed
-app.get('/oauth', (req, res) => {
+app.get('/api/auth', (req, res) => {
+  console.log("auth")
   res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`);
 });
 
