@@ -33,8 +33,6 @@ export default (props) => {
   });
 
   return (
-    <div className="w-1/3 overflow-y-hidden hover:overflow-y-auto">
-      {repos}
-    </div>
+    <div className="w-1/3 overflow-y-hidden hover:overflow-y-auto">{repos}</div>
   );
 };

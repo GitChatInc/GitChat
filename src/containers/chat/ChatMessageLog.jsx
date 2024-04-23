@@ -15,6 +15,13 @@ export default (props) => {
       timestamp: "x",
       repo: "gitchat",
     },
+    {
+      from: "tenn501",
+      content:
+        "React will create a root for the domNode, and take over managing the DOM inside it. After you’ve created a root, you need to call root.render to display a React component inside of it:",
+      timestamp: "x",
+      repo: "gitchat",
+    },
     { from: "emmagawd", content: "bro", timestamp: "x", repo: "gitchat" },
     // { from: "marsbird", content: "birds r cool", timestamp: "x", repo:'gitchat' },
     // { from: "tenn501", content: "jiggly wiggly", timestamp: "x", repo:'gitchat' },
