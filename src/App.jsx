@@ -1,13 +1,8 @@
-import React from 'react';
+import React from "react";
+import MainContainer from "./containers/MainContainer.jsx";
 
 const App = () => {
-  return (
-    <main>
-      <header>
-        <h1>Welcome to gitChat</h1>
-      </header>
-    </main>
-  );
+  return <MainContainer />;
 };
 
 export default App;
