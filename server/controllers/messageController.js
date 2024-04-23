@@ -1,8 +1,9 @@
-const db = require('../models/model');
+const db = require("../models/model");
 
 const MessageController = {};
 
 MessageController.getMessages = async (req, res, next) => {
+  console.log("INSIDE GETMESSAGES!");
   // query db for all messages related to the repo id
   const repoId = req.params.id; // _id of specified repo
 
@@ -16,20 +17,26 @@ MessageController.getMessages = async (req, res, next) => {
   `;
 
   try {
-  // invoke db.query method, passing in text & setting $1 = repoId;
-    let result = await db.query(query, [repoId]);
+    // invoke db.query method, passing in text & setting $1 = repoId;
+    // set returned result equal to array of message objects
+    let { rows } = await db.query(query, [repoId]);
+    console.log("rows: ", rows);
+
     req.messages = rows; // Attach the result to the request object
+    console.log("req.messages (get): ", req.messages);
+
     return next();
   } catch (err) {
     return next({
-    log: 'Error from getMessages middleware',
-    status: 500,
-    message: { err: err },
+      log: "Error from getMessages middleware",
+      status: 500,
+      message: { err: err },
     });
   }
-}
+};
 
 MessageController.addMessage = async (req, res, next) => {
+  console.log("INSIDE ADDMESSAGE!");
   // retrieve repo id from params
   const repoId = req.params.id;
 
@@ -47,14 +54,15 @@ MessageController.addMessage = async (req, res, next) => {
     const { rows } = await db.query(query, [user_id, repo_id, message_content]);
     // new message = first row in rows
     req.message = rows[0]; //attach new message to the req object
+    console.log("req.message: ", req.message);
     next();
   } catch (err) {
     return next({
-      log: 'Error from addMessage middleware',
+      log: "Error from addMessage middleware",
       status: 500,
       message: { err: err },
     });
   }
-}
+};
 
 module.exports = MessageController;
