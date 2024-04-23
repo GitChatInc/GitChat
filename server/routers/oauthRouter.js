@@ -9,7 +9,7 @@ OauthRouter.post('/signup', OauthController.signup, (req, res, next) => {
 
 
 //sign in
-OauthRouter.post('signin', OauthController.signin, (req, res, next) => {
+OauthRouter.post('/signin', OauthController.signin, (req, res, next) => {
   return res.status(200)
 })
 
