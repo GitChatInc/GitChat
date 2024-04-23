@@ -17,8 +17,8 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed
-app.use('/oauth', OauthRouter, (req, res) => {
-  res.status(200)
+app.get('/oauth', (req, res) => {
+  res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`);
 });
 
 // response needs to be edited after middleware logic for repos completed
