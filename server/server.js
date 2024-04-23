@@ -1,5 +1,7 @@
 const path = require('path');
 const express = require('express');
+const OauthRouter = require('./routers/oauthRouter.js');
+const ReposRouter = require('./routers/reposRouter.js');
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +16,15 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
+// response needs to be edited after middleware logic for oauth completed
+app.use('/oauth', OauthRouter, (req, res) => {
+  res.status(200)
+});
+
+// response needs to be edited after middleware logic for repos completed
+app.use('/api', ReposRouter, (req, res) => {
+  res.status(200)
+});
 
 
 
@@ -22,8 +33,23 @@ app.use(express.json());
 
 
 
+app.use('*', (req, res) => {
+  console.log('404 Page not found');
+  res.sendStatus(404);
+});
 
+// Global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'Error from middleware',
+    status: 500,
+    message: { err: 'Unknown error' },
+  };
 
+  const errorObj = Object.assign({}, defaultErr, err);
+
+  return res.status(errorObj.status).json(errorObj.message);
+});
 
 
 app.listen(PORT, () => {
