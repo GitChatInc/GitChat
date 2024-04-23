@@ -1,7 +1,9 @@
 const express = require('express');
 const ReposRouter = express.Router();
 const ReposController = require('../controllers/reposController.js');
-const MessageController = require ('../controllers/messageController.js');
+const MessageController = require('../controllers/messageController.js');
+const SessionController = require('../controllers/sessionController.js');
+
 
 
 //get all repos for a user
@@ -10,12 +12,12 @@ ReposRouter.get('/repos', ReposController.repoList, (req, res, next) => {
   return res.status(200)
 });
 
-ReposRouter.get('/messages/:id', MessageController.getMessages, (req, res, next) => {
+ReposRouter.get('/messages/:id', SessionController.isLoggedIn, MessageController.getMessages, (req, res, next) => {
   
   return res.status(200)
 });
 
-ReposRouter.post('/messages/:id', MessageController.addMessage, (req, res, next) => {
+ReposRouter.post('/messages/:id', SessionController.isLoggedIn, MessageController.addMessage, (req, res, next) => {
   
   return res.status(200)
 });
