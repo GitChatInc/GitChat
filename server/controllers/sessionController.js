@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 const sessionID = uuidv4();
 
 const SessionController = {};
@@ -13,11 +13,13 @@ SessionController.startSession = async (req, res, next) => {
   const { userName } = res.body;
 
   const text = `write db query`;
+  const oneHour = 3600000; // 1 hour in milliseconds
+  const expirationDate = new Date(Date.now() + oneHour);
   // create session
   try {
     const result = await db.query(text);
     const ssid = result.sessionId; // get id returning from the db;
-    res.cookie('ssid', ssid, { httpOnly: true });
+    res.cookie('ssid', ssid, { httpOnly: true, expires: expirationDate });
    
     return next();
 
@@ -32,7 +34,7 @@ SessionController.startSession = async (req, res, next) => {
 
 };
 
-// checking if usser has session running
+// checking if user has session running
 SessionController.isLoggedIn = async (req, res, next) => {
   // get username and maybe id from res.body after oauth completed
   const { userName } = res.body;
