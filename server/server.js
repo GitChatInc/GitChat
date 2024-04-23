@@ -6,12 +6,12 @@ const ReposRouter = require('./routers/reposRouter.js');
 const app = express();
 const PORT = 3000;
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   //get files from src during dev
-  app.use(express.static(path.resolve(__dirname, '../src')));
+  app.use(express.static(path.resolve(__dirname, "../src")));
 } else {
   //get files from dist during production
-  app.use(express.static(path.resolve(__dirname, '../dist')));
+  app.use(express.static(path.resolve(__dirname, "../dist")));
 }
 
 app.use(express.json());

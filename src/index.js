@@ -1,8 +1,6 @@
-import React from 'react';
-import { render } from 'react-dom';
-import App from './App';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./style.css";
 
-render(
-  <App/>,
-  document.getElementById('root'),
-);
+createRoot(document.querySelector("#root")).render(<App />);
