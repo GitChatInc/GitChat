@@ -7,17 +7,17 @@ const MessageController = require ('../controllers/messageController.js');
 //get all repos for a user
 ReposRouter.get('/repos', ReposController.repoList, (req, res, next) => {
   
-  return res.status(200)
+  return res.status(200);
 });
 
 ReposRouter.get('/messages/:id', MessageController.getMessages, (req, res, next) => {
   
-  return res.status(200)
+  return res.status(200);
 });
 
 ReposRouter.post('/messages/:id', MessageController.addMessage, (req, res, next) => {
   
-  return res.status(200)
+  return res.status(200);
 });
 
 
