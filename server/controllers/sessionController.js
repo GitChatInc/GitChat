@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
+// import { v4 as uuidv4 } from "uuid";
 const sessionID = uuidv4();
 
 const SessionController = {};
@@ -12,7 +13,7 @@ SessionController.startSession = async (req, res, next) => {
   // get username and maybe id from res.body after oauth completed
   const { userName } = res.body;
 
-  const text = `write db query`;
+  const text = 'write db query';
   // create session
   try {
     const result = await db.query(text);
@@ -37,7 +38,7 @@ SessionController.isLoggedIn = async (req, res, next) => {
   // get username and maybe id from res.body after oauth completed
   const { userName } = res.body;
   const ssid = req.cookie.ssid;
-  const text = `write db query`;
+  const text = 'write db query';
   const values = ['values'];
   
   try {
@@ -60,7 +61,7 @@ SessionController.endSession = async (req, res, next) => {
   // get username and maybe id from req.body 
   const { userName } = res.body;
   const ssid = req.cookie.ssid;
-  const text = `write db query`;
+  const text = 'write db query';
   const values = ['values'];
   
   try {
