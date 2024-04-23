@@ -3,7 +3,7 @@ import ChatContainer from "./chat/ChatContainer.jsx";
 
 export default () => {
   return (
-    <div class="flex min-h-screen items-center justify-center bg-slate-700">
+    <div className="flex min-h-screen items-center justify-center bg-slate-900">
       <ChatContainer />
     </div>
   );
