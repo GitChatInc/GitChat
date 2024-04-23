@@ -24,7 +24,7 @@ app.get('/api/auth', (req, res) => {
 
 app.use('/api/github', githubController.handleCallback, githubController.getUser, githubController.getRepos, (req, res) => {
   // TODO: after the github controller, username and repos should be posted to the database for future use
-  return res.status(200).send()
+  return res.redirect('/chat')
 });
 
 // response needs to be edited after middleware logic for repos completed

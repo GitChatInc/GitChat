@@ -31,12 +31,14 @@ GithubController.getUser = (req,res,next) => {
   // retrieve the current user's username from the github API; docs available here: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-the-authenticated-user
   // use the token available on res.locals.token
   // use the CLIENT_ID and CLIENT_SECRET available on process.env
+  return next()
 };
 
 GithubController.getRepos = (req,res,next) => {
   // retrive a list of the current user's repos from github API; docs available here: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user
   // use the token available on res.locals.token
   // use the CLIENT_ID and CLIENT_SECRET available on process.env
+  return next()
 }
 
 module.exports = GithubController;
