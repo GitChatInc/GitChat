@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
-const OauthRouter = require('./routers/oauthRouter.js');
 const ReposRouter = require('./routers/reposRouter.js');
+const githubController = require('./controllers/githubController.js')
 require('dotenv').config();
 
 const app = express();
@@ -20,6 +20,11 @@ app.use(express.json());
 // response needs to be edited after middleware logic for oauth completed
 app.get('/api/auth', (req, res) => {
   res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`);
+});
+
+app.use('/api/github', githubController.handleCallback, githubController.getUser, githubController.getRepos, (req, res) => {
+  // TODO: after the github controller, username and repos should be posted to the database for future use
+  return res.status(200).send()
 });
 
 // response needs to be edited after middleware logic for repos completed
