@@ -10,6 +10,18 @@ export default (props) => {
       repo: "gitchat",
     },
     {
+      from: "trialnerr",
+      content: "I <3 my wife",
+      timestamp: "x",
+      repo: "gitchat",
+    },
+    {
+      from: "CK-Zhao",
+      content: "me too!",
+      timestamp: "x",
+      repo: "gitchat",
+    },
+    {
       from: "tenn501",
       content: "jiggly wiggly",
       timestamp: "x",

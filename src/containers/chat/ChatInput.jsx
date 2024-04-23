@@ -6,9 +6,9 @@ export default () => {
       <form action="" className="flex">
         <input
           type="text"
-          className="my-1 w-full rounded-lg bg-slate-400 p-1"
+          className="w-full rounded-lg bg-slate-600 p-1"
         />
-        <button className="my-1 rounded-lg bg-slate-500 p-1">Send</button>
+        <button className="ml-3 rounded-lg bg-slate-500 py-1 px-4">Send</button>
       </form>
     </div>
   );
