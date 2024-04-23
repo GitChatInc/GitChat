@@ -6,6 +6,9 @@ const pool = new Pool({
   connectionString: PG_URI,
 });
 
+//text is the query string and params is the array of values to be inserted into the query
+//callback is the function that will be executed after the query is complete (havent used before)
+
 module.exports = {
   query: (text, params, callback) => {
     console.log('executed query', text);
