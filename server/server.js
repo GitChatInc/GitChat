@@ -19,7 +19,6 @@ app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed
 app.get('/api/auth', (req, res) => {
-  console.log("auth")
   res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`);
 });
 
