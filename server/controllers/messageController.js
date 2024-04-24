@@ -35,7 +35,7 @@ MessageController.addMessage = async (req, res, next) => {
   const { user_id, message_content } = req.body; 
   const params = [user_id, parseInt(id), message_content];
   const query = 
-  'INSERT INTO messages (user_id, repo_id, message_content) VALUES ($1, $2, $3)';
+  'INSERT INTO messages (user_id, git_repo_id, message_content) VALUES ($1, $2, $3)';
   
   try {
     const addedMessage = await db.query(query, params);
