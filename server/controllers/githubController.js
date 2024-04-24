@@ -70,7 +70,7 @@ GithubController.getRepos = (req, res, next) => {
     .then((data) => {
       const repos = []
       data.forEach((repo) => {
-        repos.push({repo_id:repo.id,repo_name:repo.name})
+        repos.push({gitId:repo.id,repo_name:repo.name})
       })
       res.locals.repos = repos
       return next();
