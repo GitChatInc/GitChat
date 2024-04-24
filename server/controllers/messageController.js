@@ -6,7 +6,7 @@ MessageController.getMessages = async (req, res, next) => {
   // retrieve repo id from params;
   const { id } = req.params;
   // query db for all messages related to the repo id;
-  const query = 'SELECT * FROM public.messages WHERE repo_id = $1';
+  const query = 'SELECT * FROM messages WHERE git_repo_id = $1';
 
   try {
     const messagesInRepo = await db.query(query, [id]);
@@ -15,7 +15,7 @@ MessageController.getMessages = async (req, res, next) => {
   } catch (err) {
     return next({
       log: `Error in messageController getMessagesInRepo middleware. ERROR: ${err}`,
-      status: 500,
+      status: 400,
       message: { err: 'Error retrieving messages from repo' },
     });
   }
@@ -45,7 +45,7 @@ MessageController.addMessage = async (req, res, next) => {
   } catch (err) {
     return next({
       log: `Error in messageController addMessage middleware. ERROR: ${err}`,
-      status: 500,
+      status: 400,
       message: { err: 'Error adding messages to repo' },
     });
   }
