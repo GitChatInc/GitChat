@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Repo from '../../components/Repo.jsx';
 
 export default (props) => {
 
+  const { currentUser } = props;
+  const [userRepos, setUserRepos] = useState([]);
+
   //write a function that fetchs all the repos for the currentUser. 
-  //currentUser-> {userId, gitHandle}
+  
+  //currentUser-> {userId, currentUser }
   const testRepos = [
     { name: 'solibee' },
     { name: 'latensee' },
@@ -23,6 +27,7 @@ export default (props) => {
     // { name: "gitchat" },
     // { name: "latensee" },
   ];
+
   const repos = [];
   testRepos.forEach((e, i) => {
     repos.push(
