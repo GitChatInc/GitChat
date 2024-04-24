@@ -41,7 +41,10 @@ reposController.getUserRepoList = async (req, res, next) => {
 //add a
 reposController.addRepos = async (req, res, next) => {
   try {
-    const { repo_names, userId } = req.body;
+
+    // get repos and userID from req.body if it doesn't exist on res.locals
+    const repo_names = res.locals.repos || req.body.repo_names
+    const userId = res.locals.userId || req.body.userId
 
     const addedRepos = [];
     const addedUserRepos = [];
