@@ -45,9 +45,10 @@ GithubController.getUser = (req, res, next) => {
     })
     .then((data) => {
       // console.log(data);
-      const expirationDate = new Date(Date.now() + 15 * 1000);
+      // const expirationDate = new Date(Date.now() + 15 * 1000);
       res.locals.username = data.login;
-      res.cookie('userId', data.id, { httpOnly: true, expires: expirationDate});
+      // console.log('id',data.id)
+      // res.cookie('userId', data.id, { httpOnly: true});
       return next();
     })
     .catch((err) => {

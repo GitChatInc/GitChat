@@ -14,30 +14,35 @@ export default () => {
     // Function to get cookie by name
     const getCookie = (name) => {
       const cookies = `${document.cookie}`;
-      console.log(cookies);
-      const cookiesArr = cookies.split('; ');
+      console.log("cookies", cookies);
+      const cookiesArr = cookies.split("; ");
       for (const cookie of cookiesArr) {
-        const [cookieName, cookieValue] = cookie.split('=');
+        const [cookieName, cookieValue] = cookie.split("=");
         if (cookieName === name) {
           return cookieValue;
         }
       }
       return null;
     };
-    
-    const currentUserCookie = getCookie('userId');
-    if (currentUserCookie) {
-      setCurrentUserId(currentUserCookie);
-    };
-    console.log(currentUserCookie);
-  }, []); 
+
+    const currentUserIdCookie = getCookie("userId");
+    if (currentUserIdCookie) {
+      setCurrentUserId(currentUserIdCookie);
+    }
+    console.log(currentUserIdCookie);
+  }, []);
 
   useEffect(() => {
     if (currentUserId) {
-      fetch(`/api/users/${currentUserId}`) // Assuming the endpoint follows the pattern '/{username}/repos'
-        .then(response => response.json())
-        .then(data => setCurrentUser(data))
-        .catch(error => console.error('Error fetching data:', error));
+      fetch(`/api/users/${currentUserId}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log('user set')
+          setCurrentUser(data);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
     }
   }, [currentUserId]);
 

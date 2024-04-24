@@ -4,6 +4,7 @@ const ReposRouter = require("./routers/reposRouter.js");
 const userRouter = require("./routers/userRouter.js");
 const reposController = require("./controllers/reposController.js");
 const githubController = require("./controllers/githubController.js");
+const userController = require('./controllers/userController.js');
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 
@@ -33,7 +34,7 @@ app.use(
   githubController.handleCallback,
   githubController.getUser,
   githubController.getRepos,
-  // TODO: add new user here, setting res.locals.userId from the result for use in reposController.addRepos
+  userController.addUser,
   // reposController.addRepos,
   (req, res) => {
     return res.redirect("/chat");
@@ -41,16 +42,12 @@ app.use(
 );
 
 // response needs to be edited after middleware logic for repos completed
-app.use("/api", ReposRouter, (req, res) => {
+app.use("/api/repos", ReposRouter, (req, res) => {
   return res.status(200);
 });
 
-app.post('/api/users', userRouter, (req, res) => {
-  return res.status(200);
-});
-
-app.get('/api/users', userRouter, (req, res) => {
-  return res.status(200);
+app.use('/api/users', userRouter, (req, res) => {
+  return res.status(200).json(res.locals.user);
 });
 
 app.use('*', (req, res) => {
