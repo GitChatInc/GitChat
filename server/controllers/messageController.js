@@ -2,6 +2,7 @@ const db = require("../models/model");
 
 const MessageController = {};
 
+ //this function return ALL the messages in a repo given the git_repo_id in params
 MessageController.getMessages = async (req, res, next) => {
   // retrieve repo id from params;
   const { id } = req.params;
@@ -21,7 +22,8 @@ MessageController.getMessages = async (req, res, next) => {
   }
 };
 
-//database messages table has the following:
+//adds a message to a specific repo (git_repo_id from params) 
+//database messages table has the following: 
 //messages
 // _id
 // user_id

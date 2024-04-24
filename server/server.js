@@ -1,67 +1,67 @@
-const path = require("path");
-const express = require("express");
-const ReposRouter = require("./routers/reposRouter.js");
-const githubController = require("./controllers/githubController.js");
-const userRouter = require("./routers/userRouter");
-require("dotenv").config();
-const cookieParser = require("cookie-parser");
+const path = require('path');
+const express = require('express');
+const ReposRouter = require('./routers/reposRouter.js');
+const githubController = require('./controllers/githubController.js');
+const userRouter = require('./routers/userRouter');
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === 'development') {
   //get files from src during dev
-  app.use(express.static(path.resolve(__dirname, "../src")));
+  app.use(express.static(path.resolve(__dirname, '../src')));
 } else {
   //get files from dist during production
-  app.use(express.static(path.resolve(__dirname, "../dist")));
+  app.use(express.static(path.resolve(__dirname, '../dist')));
 }
 
 app.use(cookieParser());
 app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed
-app.get("/api/auth", (req, res) => {
+app.get('/api/auth', (req, res) => {
   return res.redirect(
     `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`,
   );
 });
 
 app.use(
-  "/api/github",
+  '/api/github',
   githubController.handleCallback,
   githubController.getUser,
   githubController.getRepos,
   (req, res) => {
     // TODO: after the github controller, username and repos should be posted to the database for future use
-    return res.redirect("/chat");
+    return res.redirect('/chat');
   },
 );
 
 // response needs to be edited after middleware logic for repos completed
-app.use("/api", ReposRouter, (req, res) => {
+app.use('/api', ReposRouter, (req, res) => {
   return res.status(200);
 });
 
-app.post("/api/users", userRouter.postUser, (req, res) => {
+app.post('/api/users', userRouter.postUser, (req, res) => {
   return res.status(200);
 });
 
-app.get("/api/users", userRouter.getUser, (req, res) => {
+app.get('/api/users', userRouter.getUser, (req, res) => {
   return res.status(200);
 });
 
-app.use("*", (req, res) => {
-  console.log("404 Page not found");
+app.use('*', (req, res) => {
+  console.log('404 Page not found');
   res.sendStatus(404);
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: "Error from middleware",
+    log: 'Error from middleware',
     status: 500,
-    message: { err: "Unknown error" },
+    message: { err: 'Unknown error' },
   };
 
   const errorObj = Object.assign({}, defaultErr, err);
