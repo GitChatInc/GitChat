@@ -1,33 +1,32 @@
-import React from "react";
-import Repo from "../../components/Repo.jsx";
+import React, { useState, useEffect } from 'react';
+import Repo from '../../components/Repo.jsx';
 
-export default (props) => {
+export default ({ currentUser, currentUserId, setCurrentRepo, currentRepo}) => {
   const testRepos = [
-    { name: "solibee" },
-    { name: "latensee" },
-    { name: "gitchat" },
-    // { name: "solibee" },
-    // { name: "latensee" },
-    // { name: "gitchat" },
-    // { name: "solibee" },
-    // { name: "latensee" },
-    // { name: "gitchat" },
-    // { name: "solibee" },
-    // { name: "latensee" },
-    // { name: "gitchat" },
-    // { name: "solibee" },
-    // { name: "latensee" },
-    // { name: "gitchat" },
-    // { name: "latensee" },
+    { name: 'solibee' },
+    { name: 'latensee' },
+    { name: 'gitchat' },
   ];
-  let repos = [];
-  testRepos.forEach((e, i) => {
+  const repos = [];
+  const [reposList, setReposList] = useState(testRepos);
+
+  useEffect(() => {
+    if (currentUserId) {
+      fetch(`/api/repos/${currentUserId}`)
+        .then(response => response.json())
+        .then((data) => {console.log(data)})
+        .then(data => setReposList(data))
+        .catch(error => console.error('Error fetching data:', error));
+    }
+  }, [currentUserId]); 
+
+  reposList.forEach((e, i) => {
     repos.push(
       <Repo
         key={i}
         name={e.name}
-        setCurrentRepo={props.setCurrentRepo}
-        currentRepo={props.currentRepo}
+        setCurrentRepo={setCurrentRepo}
+        currentRepo={currentRepo}
       />,
     );
   });
