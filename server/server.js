@@ -31,7 +31,7 @@ app.use('/api/github', githubController.handleCallback, githubController.getUser
 
 // response needs to be edited after middleware logic for repos completed
 app.use('/api', ReposRouter, (req, res) => {
-  return res.status(200);
+  return res.status(200).send(res.locals.userRepos);
 });
 
 
