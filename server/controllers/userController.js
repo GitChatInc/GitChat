@@ -52,6 +52,7 @@ UserController.addUser = async (req, res, next) => {
     console.log('rows',addedUser.rows)
     console.log(addedUser.rows[0]._id);
     res.cookie('userId', addedUser.rows[0]._id);
+    res.locals.userId = addedUser.rows[0]._id;
     return next();
   } catch (err) {
     return next({

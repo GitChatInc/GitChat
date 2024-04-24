@@ -77,7 +77,7 @@ reposController.addRepos = async (req, res, next) => {
     // Insert into userrepos table
     for (const repo of addedRepos) {
       const query =
-        'INSERT INTO userrepos (user_id, repo_id, git_repo_id) VALUES ($1, $2, $3) RETURNING *';
+      'INSERT INTO userrepos (user_id, repo_id, git_repo_id) VALUES ($1, $2, $3) RETURNING *';
       const params = [userId, repo._id, repo.git_repo_id];
       const addedUserRepo = await db.query(query, params);
       addedUserRepos.push(addedUserRepo.rows[0]);

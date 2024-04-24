@@ -35,7 +35,7 @@ app.use(
   githubController.getUser,
   githubController.getRepos,
   userController.addUser,
-  // reposController.addRepos,
+  reposController.addRepos,
   (req, res) => {
     return res.redirect("/chat");
   },
