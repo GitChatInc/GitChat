@@ -35,7 +35,9 @@ UserController.getUser = async (req, res, next) => {
 //   PRIMARY KEY (_id)
 // );
 UserController.addUser = async (req, res, next) => {
-  const { git_handle } = req.body;
+
+  const git_handle = res.locals.username || req.body.git_handle
+  
   const params = [git_handle];
   const query =
     "INSERT INTO users (user_name) VALUES ($1) RETURNING _id, user_name";
