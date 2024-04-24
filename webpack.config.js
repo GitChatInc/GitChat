@@ -12,6 +12,7 @@ module.exports = {
     host: "localhost",
     port: 8080,
     hot: true,
+    historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, "dist"),
     },
@@ -43,6 +44,14 @@ module.exports = {
         test: /\.s?css$/,
         include: path.resolve(__dirname, "src"),
         use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },

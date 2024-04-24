@@ -27,5 +27,7 @@ module.exports = {
     quotes: ['warn', 'single'],
     semi: ['warn', 'always'],
     'space-infix-ops': 'warn',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
   },
 };
