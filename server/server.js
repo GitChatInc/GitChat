@@ -2,7 +2,9 @@ const path = require('path');
 const express = require('express');
 const ReposRouter = require('./routers/reposRouter.js');
 const githubController = require('./controllers/githubController.js');
+const userRouter = require('./routers/userRouter');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
@@ -15,29 +17,39 @@ if (process.env.NODE_ENV === 'development') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 }
 
+app.use(cookieParser());
 app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed
 app.get('/api/auth', (req, res) => {
-  return res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`);
+  return res.redirect(
+    `https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}`,
+  );
 });
 
-app.use('/api/github', githubController.handleCallback, githubController.getUser, githubController.getRepos, (req, res) => {
-  // TODO: after the github controller, username and repos should be posted to the database for future use
-  return res.redirect('/chat');
-});
+app.use(
+  '/api/github',
+  githubController.handleCallback,
+  githubController.getUser,
+  githubController.getRepos,
+  (req, res) => {
+    // TODO: after the github controller, username and repos should be posted to the database for future use
+    return res.redirect('/chat');
+  },
+);
 
 // response needs to be edited after middleware logic for repos completed
 app.use('/api', ReposRouter, (req, res) => {
   return res.status(200);
 });
 
+app.post('/api/users', userRouter.postUser, (req, res) => {
+  return res.status(200);
+});
 
-
-
-
-
-
+app.get('/api/users', userRouter.getUser, (req, res) => {
+  return res.status(200);
+});
 
 app.use('*', (req, res) => {
   console.log('404 Page not found');
@@ -56,7 +68,6 @@ app.use((err, req, res, next) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
