@@ -1,12 +1,12 @@
-const MessageController = {};
-const db = require('../models/model.js');
+const db = require("../models/model");
 
- 
+const MessageController = {};
+
 MessageController.getMessages = async (req, res, next) => {
   // retrieve repo id from params;
   const { id } = req.params;
   // query db for all messages related to the repo id;
-  const query = 'SELECT * FROM messages WHERE git_repo_id = $1';
+  const query = "SELECT * FROM messages WHERE git_repo_id = $1";
 
   try {
     const messagesInRepo = await db.query(query, [id]);
@@ -16,12 +16,12 @@ MessageController.getMessages = async (req, res, next) => {
     return next({
       log: `Error in messageController getMessagesInRepo middleware. ERROR: ${err}`,
       status: 400,
-      message: { err: 'Error retrieving messages from repo' },
+      message: { err: "Error retrieving messages from repo" },
     });
   }
 };
 
-//database messages table has the following: 
+//database messages table has the following:
 //messages
 // _id
 // user_id
@@ -32,11 +32,11 @@ MessageController.addMessage = async (req, res, next) => {
   // retrieve repo id from params, send a post
   // send post request to db with message content, user id, repo id;
   const { id } = req.params;
-  const { user_id, message_content } = req.body; 
+  const { user_id, message_content } = req.body;
   const params = [user_id, parseInt(id), message_content];
-  const query = 
-  'INSERT INTO messages (user_id, git_repo_id, message_content) VALUES ($1, $2, $3)';
-  
+  const query =
+    "INSERT INTO messages (user_id, git_repo_id, message_content) VALUES ($1, $2, $3)";
+
   try {
     const addedMessage = await db.query(query, params);
     console.log({ addedMessage });
@@ -46,7 +46,7 @@ MessageController.addMessage = async (req, res, next) => {
     return next({
       log: `Error in messageController addMessage middleware. ERROR: ${err}`,
       status: 400,
-      message: { err: 'Error adding messages to repo' },
+      message: { err: "Error adding messages to repo" },
     });
   }
 };
