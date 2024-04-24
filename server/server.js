@@ -3,6 +3,7 @@ const express = require('express');
 const ReposRouter = require('./routers/reposRouter.js');
 const githubController = require('./controllers/githubController.js');
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +16,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(express.static(path.resolve(__dirname, '../dist')));
 }
 
+app.use(cookieParser());
 app.use(express.json());
 
 // response needs to be edited after middleware logic for oauth completed

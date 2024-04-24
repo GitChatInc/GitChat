@@ -6,6 +6,10 @@ import { Routes, Route } from "react-router-dom";
 export default () => {
   const [currentUser, setCurrentUser] = useState(null);
 
+  // get userID from cookies
+  // send GET request to get the currentUser from the database by sending the user_id
+  // set that currentUser in state for use later
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-900 text-slate-400">
       <Routes>
