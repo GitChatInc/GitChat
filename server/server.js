@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const ReposRouter = require("./routers/reposRouter.js");
+const userRouter = require("./routers/userRouter.js");
 const reposController = require("./controllers/reposController.js");
 const githubController = require("./controllers/githubController.js");
 require("dotenv").config();
@@ -44,11 +45,11 @@ app.use("/api", ReposRouter, (req, res) => {
   return res.status(200);
 });
 
-app.post('/api/users', userRouter.postUser, (req, res) => {
+app.post('/api/users', userRouter, (req, res) => {
   return res.status(200);
 });
 
-app.get('/api/users', userRouter.getUser, (req, res) => {
+app.get('/api/users', userRouter, (req, res) => {
   return res.status(200);
 });
 
