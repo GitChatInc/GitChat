@@ -10,7 +10,7 @@ export default ({
   console.log({ currentUser, currentUserId, setCurrentRepo, currentRepo });
   const testRepos = [
     { name: "solibee" },
-    { name: "latensee" },
+    { name: "bird-nerd" },
     { name: "gitchat" },
   ];
   const repos = [];

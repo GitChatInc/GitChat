@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default () => {
+export default ({ testMessages, setTestMessages, currentRepo }) => {
+  const [inputText, setInputText] = useState("");
+  const [time, setTime] = useState(30);
+  function addMessage(e) {
+    console.log("repo", currentRepo);
+    // e.preventDefault();
+    setTestMessages([
+      ...testMessages,
+      {
+        from: "tenn501",
+        content: inputText,
+        timestamp: time.toString(),
+        repo: currentRepo,
+      },
+    ]);
+    setTime(time + 1);
+    setInputText("");
+    document.querySelector('textarea').value = ''
+  }
+
   return (
     <div className="p-2">
-      <form action="" className="flex">
+      <div action="" className="flex">
         <textarea
-          className="w-full h-14 resize-none rounded-lg bg-slate-600 p-1"
+          className="h-14 w-full resize-none rounded-lg bg-slate-600 p-1"
           type="submit"
+          onKeyDown={(e) => {
+            setInputText(e.target.value)
+          }}
         />
-        <button className="ml-3 rounded-lg bg-slate-500 px-4 py-1">Send</button>
-      </form>
+        <button
+          className="ml-3 rounded-lg bg-slate-500 px-4 py-1"
+          onClick={(e) => addMessage(e)}
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 };
