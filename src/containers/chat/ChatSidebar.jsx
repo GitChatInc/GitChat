@@ -1,26 +1,16 @@
-<<<<<<< HEAD
+
 import React, { useState } from 'react';
 import Repo from '../../components/Repo.jsx';
 
-export default (props) => {
+export default ({ currentUser, currentUserId, setCurrentRepo, currentRepo}) => {
 
-  const { currentUser } = props;
+  //  const { currentUser } = props;
   const [userRepos, setUserRepos] = useState([]);
 
-  //write a function that fetchs all the repos for the currentUser. 
-  
-  //currentUser-> {userId, currentUser }
-=======
-import React, { useState, useEffect } from 'react';
-import Repo from '../../components/Repo.jsx';
-
-export default ({ currentUser, currentUserId, setCurrentRepo, currentRepo}) => {
->>>>>>> main
   const testRepos = [
     { name: 'solibee' },
     { name: 'latensee' },
     { name: 'gitchat' },
-<<<<<<< HEAD
     // { name: "solibee" },
     // { name: "latensee" },
     // { name: "gitchat" },
@@ -38,23 +28,6 @@ export default ({ currentUser, currentUserId, setCurrentRepo, currentRepo}) => {
 
   const repos = [];
   testRepos.forEach((e, i) => {
-=======
-  ];
-  const repos = [];
-  const [reposList, setReposList] = useState(testRepos);
-
-  useEffect(() => {
-    if (currentUserId) {
-      fetch(`/api/repos/${currentUserId}`)
-        .then(response => response.json())
-        .then((data) => {console.log(data)})
-        .then(data => setReposList(data))
-        .catch(error => console.error('Error fetching data:', error));
-    }
-  }, [currentUserId]); 
-
-  reposList.forEach((e, i) => {
->>>>>>> main
     repos.push(
       <Repo
         key={i}
