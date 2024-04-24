@@ -1,13 +1,14 @@
-require('dotenv').config();
+require("dotenv").config();
+
 const GithubController = {};
 
 GithubController.handleCallback = (req, res, next) => {
   const { code } = req.query;
-  fetch('https://github.com/login/oauth/access_token', {
-    method: 'POST',
+  fetch("https://github.com/login/oauth/access_token", {
+    method: "POST",
     headers: {
-      'Content-Type': 'Application/JSON',
-      'Accept': 'application/json'
+      "Content-Type": "Application/JSON",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       client_id: process.env.CLIENT_ID,
@@ -18,7 +19,7 @@ GithubController.handleCallback = (req, res, next) => {
     .then((result) => {
       return result.json();
     })
-    .then(data => {
+    .then((data) => {
       res.locals.token = data.access_token;
       return next();
     })
@@ -27,18 +28,57 @@ GithubController.handleCallback = (req, res, next) => {
     });
 };
 
-GithubController.getUser = (req,res,next) => {
+GithubController.getUser = (req, res, next) => {
   // retrieve the current user's username from the github API; docs available here: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-the-authenticated-user
   // use the token available on res.locals.token
   // use the CLIENT_ID and CLIENT_SECRET available on process.env
-  return next();
+
+  const token = res.locals.token;
+  fetch("https://api.github.com/user", {
+    headers: {
+      "Content-Type": "Application/JSON",
+      Authorization: `token ${token}`
+    },
+  })
+    .then((result) => {
+      return result.json();
+    })
+    .then((data) => {
+      res.locals.username = data.login;
+      return next();
+    })
+    .catch((err) => {
+      return next(err);
+    });
 };
 
-GithubController.getRepos = (req,res,next) => {
+GithubController.getRepos = (req, res, next) => {
   // retrive a list of the current user's repos from github API; docs available here: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user
   // use the token available on res.locals.token
   // use the CLIENT_ID and CLIENT_SECRET available on process.env
-  return next();
+
+  const token = res.locals.token;
+  fetch("https://api.github.com/user/repos", {
+    headers: {
+      "Content-Type": "Application/JSON",
+      Authorization: `token ${token}`,
+    },
+  })
+    .then((result) => {
+      return result.json();
+    })
+    .then((data) => {
+      const repos = []
+      data.forEach((repo) => {
+        repos.push({repo_id:repo.id,repo_name:repo.name})
+      })
+      res.locals.repos = repos
+      console.log(res.locals.repos)
+      return next();
+    })
+    .catch((err) => {
+      return next(err);
+    });
 };
 
 module.exports = GithubController;
