@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const ReposRouter = require('./routers/reposRouter.js');
-const githubController = require('./controllers/githubController.js')
+const githubController = require('./controllers/githubController.js');
 require('dotenv').config();
 
 const app = express();

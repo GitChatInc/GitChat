@@ -23,7 +23,7 @@ reposController.getUserRepoList = async (req, res, next) => {
   }
 };
 
-//frontend should sent something like this in req.body 
+//sent something like this to function
 // {
 //   "repo_names": [
 //     { "name": "repo1", "gitId": "123" , "repo_id": "1" },
@@ -79,9 +79,9 @@ reposController.addRepos = async (req, res, next) => {
     }
 
     const addedRepoInfo = { addedRepos, addedUserRepos };
-
     res.locals.addedRepos = addedRepoInfo;
     return next();
+
   } catch (err) {
     return next({
       log: `Error in reposController.addRepos middleware. ERROR: ${err}`,
@@ -90,7 +90,5 @@ reposController.addRepos = async (req, res, next) => {
     });
   }
 };
-
-
 
 module.exports = reposController;
