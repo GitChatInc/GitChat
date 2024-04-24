@@ -73,7 +73,6 @@ GithubController.getRepos = (req, res, next) => {
         repos.push({repo_id:repo.id,repo_name:repo.name})
       })
       res.locals.repos = repos
-      console.log(res.locals.repos)
       return next();
     })
     .catch((err) => {
