@@ -12,18 +12,12 @@ ReposRouter.get('/repos', ReposController.repoList, (req, res, next) => {
 
 ReposRouter.get('/messages/:id', MessageController.getMessages, (req, res, next) => {
   
-  return res.status(200);
+  return res.status(200).json(res.locals.messages);
 });
 
 ReposRouter.post('/messages/:id', MessageController.addMessage, (req, res, next) => {
   
-  return res.status(200);
+  return res.status(200).json(res.locals.addedMessage);
 });
-
-
-
-
-
-
 
 module.exports = ReposRouter;
