@@ -3,12 +3,14 @@ const reposController = {};
 
 //list all the repos for a specific user
 reposController.getUserRepoList = async (req, res, next) => {
+  console.log('getUserRepoList')
   try {
     // retrieve user id from req.body or req.params??;
     // const { userId } = req.body;
     const { userId } = req.params;
     // query db for all repos for specifiic user
-    const query = 'SELECT * FROM userrepos WHERE user_id = $1';
+    // const query = 'SELECT r.repo_name FROM userrepos ur LEFT JOIN repos r ON ur.repo_id = r._id WHERE ur.user_id = $1';
+    const query = 'SELECT r.repo_name FROM repos r LEFT JOIN userrepos ur ON ur.repo_id = r._id WHERE ur.user_id = $1';
     const params = [userId];
     const userRepos = await db.query(query, params);
     // persist the list through middleware to send back to client;

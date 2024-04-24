@@ -32,22 +32,23 @@ app.get("/api/auth", (req, res) => {
 app.use(
   "/api/github",
   githubController.handleCallback,
-  githubController.getUser,
-  githubController.getRepos,
-  userController.addUser,
-  reposController.addRepos,
+  // githubController.getUser,
+  // githubController.getRepos,
+  // userController.addUser,
+  // reposController.addRepos,
   (req, res) => {
     return res.redirect("/chat");
   },
 );
 
 // response needs to be edited after middleware logic for repos completed
-app.use("/api/repos", ReposRouter, (req, res) => {
-  return res.status(200);
-});
 
 app.use('/api/users', userRouter, (req, res) => {
   return res.status(200).json(res.locals.user);
+});
+
+app.use("/api", ReposRouter, (req, res) => {
+  return res.status(200);
 });
 
 app.use('*', (req, res) => {

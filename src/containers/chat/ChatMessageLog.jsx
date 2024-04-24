@@ -55,6 +55,20 @@ export default (props) => {
     { from: "tenn501", content: "buzz", timestamp: "18", repo: "solibee" },
   ];
 
+  //fetch messages for user from the db
+  // const [messages, setMessages] = useState([]); 
+  // useEffect(() => {
+  //   if (currentUserId) {
+  //     fetch(`/api/repos/${currentUserId}`)
+  //       .then(response => response.json())
+  //       .then((data) => {console.log(data)})
+  //       .then(data => setReposList(data))
+  //       .catch(error => console.error('Error fetching data:', error));
+  //   }
+  // }, [currentUserId]); 
+
+
+
 
   // messages need to be filtered, sorted, flagged for sequential senders and then sorted in reverse before converted to components
   let prevMessageSender;
