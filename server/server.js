@@ -44,8 +44,16 @@ app.use("/api", ReposRouter, (req, res) => {
   return res.status(200);
 });
 
-app.use("*", (req, res) => {
-  console.log("404 Page not found");
+app.post('/api/users', userRouter.postUser, (req, res) => {
+  return res.status(200);
+});
+
+app.get('/api/users', userRouter.getUser, (req, res) => {
+  return res.status(200);
+});
+
+app.use('*', (req, res) => {
+  console.log('404 Page not found');
   res.sendStatus(404);
 });
 
